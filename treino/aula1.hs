@@ -12,7 +12,7 @@ vendas n
 ePrimo :: Int -> Bool
 ePrimo 0 = False
 ePrimo 1 = False
---ePrimo n = length [x | x <- [2..n-1], mod n x == 0] == 0
+ePrimo n = length [x | x <- [2..n-1], mod n x == 0] == 0
 
 --retorna se dois números são primos entre si:
 primoEntreSi :: Int -> Int -> Bool
