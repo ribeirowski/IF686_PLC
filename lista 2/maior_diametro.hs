@@ -1,23 +1,19 @@
-{- main = do
+main = do
     s <- getLine
     let result = maiorDiametro (read s::Tree Int)
-    print result -}
+    print result
 
 data Tree t = Nilt | Node t (Tree t) (Tree t)
             deriving (Read)
 
-{- maiorDiametro :: Ord t => Tree t -> Int -}
+maiorDiametro :: Ord t => Tree t -> Int
+maiorDiametro Nilt = 0
+maiorDiametro (Node x left right) = max (max (maiorDiametro left) (maiorDiametro right)) (diametro (Node x left right))
 
-noLeft :: Ord t => Tree t -> Int
-noLeft Nilt = 0
-noLeft (Node root Nilt Nilt) = 0
-noLeft (Node root Nilt right) = 1 + noLeft right
-noLeft (Node root left Nilt) = 1 + noLeft left
-noLeft (Node root left right) = 1 + noLeft left + noRight left
+altura :: Ord t => Tree t -> Int
+altura Nilt = 0
+altura (Node _ left right) = 1 + (max (altura left) (altura right))
 
-noRight :: Ord t => Tree t -> Int
-noRight Nilt = 0
-noRight (Node root Nilt Nilt) = 0
-noRight (Node root Nilt right) = 1 + noRight right
-noRight (Node root left Nilt) = 1 + noRight left
-noRight (Node root left right) = 1 + noRight right + noLeft right
+diametro :: Ord t => Tree t -> Int
+diametro Nilt = 0
+diametro (Node _ left right) = 1 + (altura left) + (altura right)
